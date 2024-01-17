@@ -6,6 +6,16 @@ let canvasWidth = 600;
 let canvasHeight = 600;
 let tileSize = 20;
 
+function createGrid() {
+    let gridX = canvasWidth / tileSize;
+    let gridY = canvasHeight / tileSize;
+    let grid = Array(gridY).fill(Array(gridX));
+    for (let i = 0; i < gridY; i++) {
+        grid[i].fill(0);
+    }
+    return grid;
+}
+
 function drawGrid(tileSize) {
     ctx.beginPath();
     ctx.lineWidth = 1;
