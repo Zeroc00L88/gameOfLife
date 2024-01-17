@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #383eaa;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    color: white;
+    height: 40px;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 80px);
+}
+
+#canvas1 {
+    background: black;
+    /* max-width: 90%; */
+    /* max-height: 90%; */
+    height: 600px;
+    width: 600px;
+}
