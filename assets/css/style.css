@@ -18,16 +18,30 @@ header {
 }
 
 main {
+    position: relative;
     display: flex;
+    flex-direction: column-reverse;
     align-items: center;
-    justify-content: center;
     height: calc(100vh - 80px);
+}
+
+button {
+    padding: 10px;
+    font-size: 20px;
+    width: 100px;
+    margin: 20px;
+}
+
+#canvas1,
+#canvas2 {
+    position: absolute;
+    height: 600px;
+    width: 600px;
+    top: calc(50% - 300px);
+    left: calc(50% - 300px);
 }
 
 #canvas1 {
     background: white;
-    /* max-width: 90%; */
-    /* max-height: 90%; */
-    height: 600px;
-    width: 600px;
+    z-index: -1;
 }
