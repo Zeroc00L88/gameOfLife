@@ -18,17 +18,32 @@ header {
 }
 
 main {
-    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: calc(100vh - 80px);
+    gap: 30px;
+}
+
+#gameContainer {
+    position: relative;
+    height: 600px;
+    width: 600px;
+}
+
+#commands {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 button {
     padding: 10px;
     font-size: 20px;
     height: 50px;
-    margin: 20px;
 }
 
 #canvas1,
@@ -36,8 +51,6 @@ button {
     position: absolute;
     height: 600px;
     width: 600px;
-    top: calc(50% - 300px);
-    left: calc(50% - 300px);
 }
 
 #canvas1 {

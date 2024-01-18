@@ -4,11 +4,13 @@ const ctxTop = canvasTop.getContext("2d");
 const ctx = canvas.getContext("2d");
 const launchBtn = document.querySelector("#launchBtn");
 const stepBtn = document.querySelector("#stepBtn");
+const clearBtn = document.querySelector("#clearBtn");
 
 let canvasWidth = 600;
 let canvasHeight = 600;
 let tileSize = 10;
 let grid = createGrid();
+let gameInterval;
 
 canvasTop.addEventListener("click", (e) => {
     let currentTile = getClickedTile(e.offsetX, e.offsetY);
@@ -17,14 +19,20 @@ canvasTop.addEventListener("click", (e) => {
 });
 
 launchBtn.addEventListener("click", (e) => {
-    setInterval(() => {
+    gameInterval = setInterval(() => {
         checkAround();
         drawRect();
-    }, 500);
+    }, 100);
 });
 
 stepBtn.addEventListener("click", (e) => {
     checkAround();
+    drawRect();
+});
+
+clearBtn.addEventListener("click", (e) => {
+    clearInterval(gameInterval);
+    clear();
     drawRect();
 });
 
@@ -60,16 +68,13 @@ function checkAround() {
             }
             if (e == 1) {
                 if (ngbCount <= 1 || ngbCount >= 4) {
-                    // updateGrid(x, y, 0);
                     let arrRemove = [];
                     arrRemove.push(x);
                     arrRemove.push(y);
                     remove.push(arrRemove);
                 }
             } else {
-                console.log(ngbCount, "x", x, "y", y);
                 if (ngbCount == 3) {
-                    // updateGrid(x, y, 1);
                     let arrAdd = [];
                     arrAdd.push(x);
                     arrAdd.push(y);
@@ -132,6 +137,10 @@ function drawRect() {
 
 function clearTile(xTile, yTile) {
     ctxTop.clearRect(xTile * tileSize, yTile * tileSize, tileSize, tileSize);
+}
+
+function clear() {
+    grid = createGrid();
 }
 
 drawGrid(tileSize);

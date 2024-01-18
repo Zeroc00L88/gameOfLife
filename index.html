@@ -12,10 +12,15 @@
             <h1>Game Of Life</h1>
         </header>
         <main>
-            <canvas id="canvas1" width="600" height="600"></canvas>
-            <canvas id="canvas2" width="600" height="600"></canvas>
-            <button type="button" id="launchBtn">Launch</button>
-            <button type="button" id="stepBtn">Step</button>
+            <div id="commands">
+                <button type="button" id="launchBtn">Launch</button>
+                <button type="button" id="stepBtn">Step</button>
+                <button type="button" id="clearBtn">Clear</button>
+            </div>
+            <div id="gameContainer">
+                <canvas id="canvas1" width="600" height="600"></canvas>
+                <canvas id="canvas2" width="600" height="600"></canvas>
+            </div>
         </main>
         <script src="./assets/js/main.js"></script>
     </body>
