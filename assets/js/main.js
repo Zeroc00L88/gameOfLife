@@ -3,6 +3,7 @@ const canvasTop = document.querySelector("#canvas2");
 const ctxTop = canvasTop.getContext("2d");
 const ctx = canvas.getContext("2d");
 const launchBtn = document.querySelector("#launchBtn");
+const stepBtn = document.querySelector("#stepBtn");
 
 let canvasWidth = 600;
 let canvasHeight = 600;
@@ -15,10 +16,77 @@ canvasTop.addEventListener("click", (e) => {
     drawRect();
 });
 
-launchBtn.addEventListener("click", (e) => { });
+launchBtn.addEventListener("click", (e) => {
+    setInterval(() => {
+        checkAround();
+        drawRect();
+    }, 500);
+});
+
+stepBtn.addEventListener("click", (e) => {
+    checkAround();
+    drawRect();
+});
+
+function checkAround() {
+    let add = [];
+    let remove = [];
+    grid.forEach((el, y) => {
+        el.forEach((e, x) => {
+            let ngbCount = 0;
+            if (y > 0) {
+                ngbCount += grid[y - 1][x];
+            }
+            if (y > 0 && x < el.length - 1) {
+                ngbCount += grid[y - 1][x + 1];
+            }
+            if (x < el.length - 1) {
+                ngbCount += grid[y][x + 1];
+            }
+            if (y < grid.length - 1 && x < el.length - 1) {
+                ngbCount += grid[y + 1][x + 1];
+            }
+            if (y < grid.length - 1) {
+                ngbCount += grid[y + 1][x];
+            }
+            if (y < grid.length - 1 && x > 0) {
+                ngbCount += grid[y + 1][x - 1];
+            }
+            if (x > 0) {
+                ngbCount += grid[y][x - 1];
+            }
+            if (y > 0 && x > 0) {
+                ngbCount += grid[y - 1][x - 1];
+            }
+            if (e == 1) {
+                if (ngbCount <= 1 || ngbCount >= 4) {
+                    // updateGrid(x, y, 0);
+                    let arrRemove = [];
+                    arrRemove.push(x);
+                    arrRemove.push(y);
+                    remove.push(arrRemove);
+                }
+            } else {
+                console.log(ngbCount, "x", x, "y", y);
+                if (ngbCount == 3) {
+                    // updateGrid(x, y, 1);
+                    let arrAdd = [];
+                    arrAdd.push(x);
+                    arrAdd.push(y);
+                    add.push(arrAdd);
+                }
+            }
+        });
+    });
+    remove.map((e) => {
+        updateGrid(e[0], e[1], 0);
+    });
+    add.map((e) => {
+        updateGrid(e[0], e[1], 1);
+    });
+}
 
 function createGrid() {
-    console.log("create grid");
     let gridX = canvasWidth / tileSize;
     let gridY = canvasHeight / tileSize;
     let grid = new Array(gridY).fill().map(() => new Array(gridX).fill(0));
@@ -26,9 +94,7 @@ function createGrid() {
 }
 
 function updateGrid(x, y, nb) {
-    console.log("x:", x, ", y:", y);
     grid[y][x] = nb;
-    console.log(grid);
 }
 
 function drawGrid(tileSize) {
@@ -57,6 +123,8 @@ function drawRect() {
         el.forEach((e, x) => {
             if (e == 1) {
                 ctxTop.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+            } else {
+                clearTile(x, y);
             }
         });
     });
