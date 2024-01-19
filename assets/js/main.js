@@ -6,11 +6,23 @@ const launchBtn = document.querySelector("#launchBtn");
 const stepBtn = document.querySelector("#stepBtn");
 const clearBtn = document.querySelector("#clearBtn");
 
-let canvasWidth = 600;
+let canvasWidth = 800;
 let canvasHeight = 600;
 let tileSize = 10;
 let grid = createGrid();
 let gameInterval;
+
+if (window.innerWidth < 700) {
+    canvasWidth = 350;
+}
+
+canvas.width = canvasWidth;
+canvas.height = canvasHeight;
+canvasTop.width = canvasWidth;
+canvasTop.height = canvasHeight;
+
+document.documentElement.style.setProperty("--contWidth", canvasWidth + "px");
+document.documentElement.style.setProperty("--contHeight", canvasHeight + "px");
 
 canvasTop.addEventListener("click", (e) => {
     let currentTile = getClickedTile(e.offsetX, e.offsetY);
@@ -23,6 +35,9 @@ launchBtn.addEventListener("click", (e) => {
         checkAround();
         drawRect();
     }, 100);
+    launchBtn.style.pointerEvents = "none";
+    canvasTop.style.pointerEvents = "none";
+    launchBtn.style.color = "grey";
 });
 
 stepBtn.addEventListener("click", (e) => {
@@ -34,6 +49,9 @@ clearBtn.addEventListener("click", (e) => {
     clearInterval(gameInterval);
     clear();
     drawRect();
+    launchBtn.style.pointerEvents = "auto";
+    canvasTop.style.pointerEvents = "auto";
+    launchBtn.style.color = "black";
 });
 
 function checkAround() {

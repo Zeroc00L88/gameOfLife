@@ -1,17 +1,27 @@
+:root {
+    --contWidth: 600px;
+    --contHeight: 600px;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 body {
-    background: #383eaa;
+    background-image: url(../images/bg.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 header {
+    position: sticky;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.4);
     padding: 20px;
     color: white;
     height: 40px;
@@ -28,12 +38,12 @@ main {
 
 #gameContainer {
     position: relative;
-    height: 600px;
-    width: 600px;
+    height: var(--contHeight);
+    width: var(--contWidth);
 }
 
 #commands {
-    width: 100vw;
+    width: var(--contWidth);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -46,14 +56,31 @@ button {
     height: 50px;
 }
 
+.window {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 400px;
+    height: 400px;
+    left: calc(50% - 230px);
+    top: calc(50% - 230px);
+    z-index: 99;
+    background: rgba(0, 0, 0, 0.8);
+    font-size: 20px;
+    color: white;
+    border-radius: 10px;
+    padding: 30px;
+}
+
 #canvas1,
 #canvas2 {
     position: absolute;
-    height: 600px;
-    width: 600px;
 }
 
 #canvas1 {
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     z-index: -1;
 }
